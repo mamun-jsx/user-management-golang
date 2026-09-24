@@ -7,16 +7,26 @@ import (
 	"github.com/joho/godotenv"
 )
 
+/**
+# Server Configuration
+APP_PORT=8080
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=mysecretpassword
+DB_NAME=user_management_app
+**/
+//Declare a struct of config
 type Config struct {
-	APPport    string
-	DBhost     string
-	DBport     string
-	DBuser     string
-	DBpassword string
-	DBname     string
+	AppPort    string
+	DbHost     string
+	DbPort     string
+	DbUser     string
+	DbPassword string
+	DbName     string
 }
 
-// get env key from .env file
+// create func to take env value from .env file
 func getEnv(key, fallback string) string {
 	if value, ok := os.LookupEnv(key); ok {
 		return value
@@ -24,18 +34,16 @@ func getEnv(key, fallback string) string {
 	return fallback
 }
 
-// load env from config
-
 func LoadEnv() *Config {
 	if err := godotenv.Load(); err != nil {
-		log.Fatal("Can not find env variables")
+		log.Fatal("env variable required")
 	}
+
 	return &Config{
-		APPport:    getEnv("APP_PORT", "8080"),
-		DBhost:     getEnv("DB_HOST", "localhost"),
-		DBport:     getEnv("DB_PORT", "5432"),
-		DBuser:     getEnv("DB_USER", "postgres"),
-		DBpassword: getEnv("DB_PASSWORD", "mysecretpassword"),
-		DBname:     getEnv("DB_NAME", "user_management_app"),
+		AppPort:    getEnv("APP_PORT", "8080"),
+		DbHost:     getEnv("DB_HOST", "localhost"),
+		DbPort:     getEnv("DB_PORT", "5432"),
+		DbPassword: getEnv("DB_PASSWORD", "mysecretpassword"),
+		DbName: getEnv("DB_NAME","user_management_app"),
 	}
 }
