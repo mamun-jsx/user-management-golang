@@ -3,20 +3,10 @@ package config
 import (
 	"log"
 	"os"
-
 	"github.com/joho/godotenv"
 )
 
-/**
-# Server Configuration
-APP_PORT=8080
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=postgres
-DB_PASSWORD=mysecretpassword
-DB_NAME=user_management_app
-**/
-//Declare a struct of config
+// Declare a struct of config
 type Config struct {
 	AppPort    string
 	DbHost     string
@@ -34,16 +24,19 @@ func getEnv(key, fallback string) string {
 	return fallback
 }
 
+// make function to call into anywhere
 func LoadEnv() *Config {
+	//* call dodotenv.Load() function from package
 	if err := godotenv.Load(); err != nil {
 		log.Fatal("env variable required")
 	}
-
+	// return and store all env values into config
 	return &Config{
 		AppPort:    getEnv("APP_PORT", "8080"),
 		DbHost:     getEnv("DB_HOST", "localhost"),
 		DbPort:     getEnv("DB_PORT", "5432"),
 		DbPassword: getEnv("DB_PASSWORD", "mysecretpassword"),
-		DbName: getEnv("DB_NAME","user_management_app"),
+		DbName:     getEnv("DB_NAME", "user_management_app"),
 	}
 }
+

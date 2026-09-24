@@ -26,7 +26,7 @@ func DatabaseConnection(cfg *config.Config) (*gorm.DB, error) {
 	if err != nil {
 		log.Fatal("Unable to connect database")
 	}
-	// TODO 4 : mount auto-migration into database
+	// TODO 4 : mount auto-migration into database with model
 	if err := db.AutoMigrate(&models.ProductModel{}, &models.UserModel{}); err != nil {
 		return nil, fmt.Errorf("unable to migrate database: %w", err)
 	}
