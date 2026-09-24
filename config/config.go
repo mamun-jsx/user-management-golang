@@ -1,9 +1,9 @@
 package config
 
 import (
+	"github.com/joho/godotenv"
 	"log"
 	"os"
-	"github.com/joho/godotenv"
 )
 
 // Declare a struct of config
@@ -35,8 +35,8 @@ func LoadEnv() *Config {
 		AppPort:    getEnv("APP_PORT", "8080"),
 		DbHost:     getEnv("DB_HOST", "localhost"),
 		DbPort:     getEnv("DB_PORT", "5432"),
+		DbUser:     getEnv("DB_USER", "postgres"),
 		DbPassword: getEnv("DB_PASSWORD", "mysecretpassword"),
 		DbName:     getEnv("DB_NAME", "user_management_app"),
 	}
 }
-
