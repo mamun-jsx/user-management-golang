@@ -15,9 +15,8 @@ func main() {
 	fiberApp := fiber.New()
 	router.ApplicationRouter(fiberApp, application)
 
-	serverAddr := fmt.Sprintf("%s", application.Config.AppPort)
+	serverAddr := fmt.Sprintf(":%s", application.Config.AppPort) 
 	log.Printf("🚀 Server is running on http://localhost%s", serverAddr)
-	// handle error if have
 	if err := fiberApp.Listen(serverAddr); err != nil {
 		log.Fatalf("server failed to run: %v", err)
 	}
