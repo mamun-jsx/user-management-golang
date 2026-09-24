@@ -24,7 +24,7 @@ func DatabaseConnection(cfg *config.Config) (*gorm.DB, error) {
 
 	// TODO 3 : handle error if database unable to open
 	if err != nil {
-		log.Fatal("Unable to connect database")
+		return nil, fmt.Errorf("failed to open postgresql connection: %w", err)
 	}
 	// TODO 4 : mount auto-migration into database with model
 	if err := db.AutoMigrate(&models.ProductModel{}, &models.UserModel{}); err != nil {

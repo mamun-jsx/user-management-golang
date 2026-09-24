@@ -10,6 +10,6 @@ import (
 
 func ApplicationRouter(fiberApp *fiber.App, application *app.App) {
 	fiberApp.Get("/", func(c fiber.Ctx) error {
-		return c.SendString("Hello, World!")
+		return c.SendString("Hello, World User Management app !")
 	})
 }
