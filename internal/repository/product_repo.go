@@ -1,6 +1,9 @@
 package repository
 
-import "gorm.io/gorm"
+import (
+	"github.com/mamun-jsx/user-management-golang/internal/models"
+	"gorm.io/gorm"
+)
 
 type ProductRepository struct {
 	db *gorm.DB
@@ -14,3 +17,6 @@ func NewProductRepository(db *gorm.DB) *ProductRepository {
 
 // create a new Product to database
 
+func (r *ProductRepository) Create(product *models.ProductModel) error {
+	return r.db.Create(product).Error
+}
