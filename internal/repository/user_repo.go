@@ -1,6 +1,8 @@
 package repository
 
 import (
+	"errors"
+
 	"github.com/mamun-jsx/user-management-golang/internal/models"
 	"gorm.io/gorm"
 )
@@ -35,6 +37,9 @@ func (r *UserRepository) FindUserByEmail(email string) (*models.UserModel, error
 	var userByEmail models.UserModel
 	err := r.db.First(&userByEmail, "email = ?", email).Error
 	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, nil
+		}
 		return nil, err
 	}
 	return &userByEmail, nil
